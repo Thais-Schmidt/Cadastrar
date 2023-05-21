@@ -5,26 +5,21 @@
 // 5 - Acrescentar uma variável nomeCadastro e colocar o seu nome;
 // 6 - O usuário só entrará se estiver cadastrado 
 
-var bemvindo = document.getElementById('bemvindo');
-
+let bemvindo = document.getElementById('bemvindo');
 let botao = document.createElement("button");
 botao.innerText = "Acessar";
 botao.onclick = entrar;
 bemvindo.appendChild(botao);
 
+usuarios = ["Thais Schmidt", "fulano2", "fulano3", "fulano4", "fulano5"];
+
 function entrar(){
 
-    let  nomeCadastro = prompt("Por favor, digite seu nome: ");
+    let encontrou = false;
+    let nomeCadastro = prompt("Por favor, digite seu nome: ");
 
-    if(nomeCadastro === "Thais Schmidt"){
-        bemvindo.innerHTML = "Bem vinda! "+nomeCadastro+".<br>"
+    if(nomeCadastro === '' || nomeCadastro === null){
 
-        let botaoVoltar = document.createElement("button")
-        botaoVoltar.innerText = "Sair da conta";
-        botaoVoltar.onclick = voltar;
-        bemvindo.appendChild(botaoVoltar); 
-    }
-    else{
         alert("Algo deu errado, tente novamente!");
         bemvindo.innerHTML = "Clique no botao para acessar. <br>";
 
@@ -32,6 +27,26 @@ function entrar(){
         botao.innerText = "Acessar";
         botao.onclick = entrar;
         bemvindo.appendChild(botao);
+
+    } else {
+        
+        for (let i = 0; i <=4; i++) {
+
+            if ((nomeCadastro[i] == usuarios)) {
+
+                bemvindo.innerHTML = "Bem vinda! "+nomeCadastro+".<br>";
+                let botaoVoltar = document.createElement("button");
+                botaoVoltar.innerText = "Sair da conta";
+                botaoVoltar.onclick = voltar;
+                bemvindo.appendChild(botaoVoltar);
+                encontrou = true;
+                return;
+            }
+        }
+    }
+
+    if(encontrou == false){
+        alert("Nome não cadastrado!");
     }
 
 }
@@ -47,4 +62,3 @@ function voltar(){
     bemvindo.appendChild(botao);
 
 }
-
